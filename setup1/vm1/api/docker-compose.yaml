@@ -1,0 +1,13 @@
+networks:
+  test:
+    external: true
+    name: artifacts_test
+
+services:
+  api:
+    image: api:1.0
+    build: .
+    networks:
+      - test
+    ports:
+      - 4000:4000

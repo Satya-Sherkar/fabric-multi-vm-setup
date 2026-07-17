@@ -1,0 +1,53 @@
+{
+    "name": "asset-transfer-basic",
+    "version": "1.0.0",
+    "description": "Asset-Transfer-Basic contract implemented in JavaScript",
+    "main": "index.js",
+    "engines": {
+        "node": ">=20"
+    },
+    "scripts": {
+        "start": "fabric-chaincode-node start",
+        "lint": "eslint .js */*.js",
+        "pretest": "npm run lint",
+        "test": "nyc mocha --recursive",
+        "start:server-nontls": "fabric-chaincode-node server --chaincode-address=$CHAINCODE_SERVER_ADDRESS --chaincode-id=$CHAINCODE_ID",
+        "start:server-debug": "NODE_OPTIONS='--inspect=0.0.0.0:9229' fabric-chaincode-node server --chaincode-address=$CHAINCODE_SERVER_ADDRESS --chaincode-id=$CHAINCODE_ID",
+        "start:server": "fabric-chaincode-node server --chaincode-address=$CHAINCODE_SERVER_ADDRESS --chaincode-id=$CHAINCODE_ID --chaincode-tls-key-file=/hyperledger/privatekey.pem --chaincode-tls-client-cacert-file=/hyperledger/rootcert.pem --chaincode-tls-cert-file=/hyperledger/cert.pem"
+    },
+    "engineStrict": true,
+    "author": "Hyperledger",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "fabric-contract-api": "~2.1",
+        "fabric-shim": "~2.1",
+        "json-stringify-deterministic": "^1.0.0",
+        "sort-keys-recursive": "^2.1.0"
+    },
+    "devDependencies": {
+        "chai": "^4.4.1",
+        "eslint": "^8.57.0",
+        "mocha": "^10.4.0",
+        "nyc": "^15.1.0",
+        "sinon": "^18.0.0",
+        "sinon-chai": "^3.7.0"
+    },
+    "nyc": {
+        "exclude": [
+            "coverage/**",
+            "test/**",
+            "index.js",
+            ".eslintrc.js"
+        ],
+        "reporter": [
+            "text-summary",
+            "html"
+        ],
+        "all": true,
+        "check-coverage": true,
+        "statements": 100,
+        "branches": 100,
+        "functions": 100,
+        "lines": 100
+    }
+}
